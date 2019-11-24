@@ -77,10 +77,10 @@ hr{
     background:red;
     color:white;
     margin-right: 40px;
-    width:200px;
-    height:auto;
-    height:40px;
-    font-size: 20px;
+    width:250px;
+    height:60px;
+    
+    font-size: 24px;
 }
 
 #copyClipboard{
@@ -88,10 +88,10 @@ hr{
     background:grey;
     color: white;
     margin-top:10px;
-    width:200px;
-    height:auto;
-    height:40px;
-    font-size: 20px;
+    width:250px;
+    height:60px;
+    
+    font-size: 24px;
     
 }
 
