@@ -15,17 +15,24 @@ header{
 }
 
 html {
+    /* vertical-align: middle; */
+    position: absolute;
     display: table;
-    width: 70%;
+    width: 90%;
+    margin:0;
+    top:20%;
+    left:5%;
 }
 
 body {
+    position: relative; 
+    /* vertical-align: middle; */
     display: table-cell;
     vertical-align: middle;
     background:black;
     font-family: 'Arial','Helvetica Neue','Helvetica', 'sans-serif';
     max-width: 100%;
-    margin-left:0 auto;
+ 
 }
 h2{
     text-align: left;
