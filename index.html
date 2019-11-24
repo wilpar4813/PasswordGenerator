@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css">
+    <title>Password Generator</title>
+</head>
+
+<body>
+    <div id="genWrapper">
+        <header>
+            <h1>Password Generator</h1>
+        </header>
+        <div>
+            <div id="passwordWrapper">
+                <h2>Generate a Password</h2>
+                <hr>
+                <textarea id="passwordArea" id="generatedPassword" placeholder="Your Secure Password"
+                    aria-label="Generated Password"></textarea>
+                <hr>
+                <button id="generate" onclick="clearField();passwordGenerator()">Generate Password</button>
+                <button id="copyClipboard" onclick="copyToClipboard()">Copy to Clipboard</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        //Variables
+        var passwordLength;
+        var newPassword = [];
+        var nextChar = [];
+        var uppChar = false;
+        var lowChar = false;
+        var numChar = false;
+        var speChar = false;
+        var charPosition = 0;
+        var generatedPassword = " ";
+
+        //Random character generators  
+        function getRandUpper() {
+            var upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']; //upper case letters
+            charPosition = Math.floor(Math.random() * 25) + 1;
+            return upperCase[charPosition];
+        }
+
+        function getRandLower() {
+            var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];// lower case letters
+            charPosition = Math.floor(Math.random() * 25) + 1;
+            return lowerCase[charPosition];
+        }
+
+        function getRandNumeric() {
+            var numeric = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];// numeric characters
+            charPosition = Math.floor(Math.random() * 9) + 1;
+            return numeric[charPosition];
+        }
+
+        function getRandSpecial() {
+            var specialChar = ['~', '`', '!', '#', '$', '%', '^', '&', '*', '+', '=', '-', '[', ']', '\\', '\'', ';', ',', '/', '{', '}', '|', '\"', ':', '<', '>', '?'];// special characters
+            charPosition = Math.floor(Math.random() * 26) + 1;
+            return specialChar[charPosition];
+        }
+
+        //Clear the text box
+        function clearField() {
+            document.getElementById("passwordArea").value = " ";
+            generatedPassword = " ";
+            newPassword = [];
+        }
+
+        // copy to clipboard
+        function copyToClipboard() {
+            var copyText = document.getElementById("passwordArea");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+            alert("Copied the text: " + copyText.value);
+        }
+        //Begin main section of code  
+        function passwordGenerator() {
+ 
+            do {
+                var txt;
+
+                passwordLength = prompt("Please enter a password length between 8 and 128");
+                if (passwordLength === null) {
+                    return;
+                } else if (!Number.isInteger(+passwordLength)) {
+                    
+                    passwordLength = prompt("Sorry! That was not a number.  Please enter a password length between 8 and 128.");
+                    if (passwordLength === null) {
+                        return;
+                    }
+                }
+            }
+            while (passwordLength < 8 || passwordLength > 128 || !Number.isInteger(+passwordLength));
+        
+            do {
+                //clearField();
+                uppChar = confirm("Click OK if you would you like to use upper case characters in password?");
+                lowChar = confirm("Click OK if you would you like to use lower case characters in password?");
+                numChar = confirm("Click OK if you would you like to use numeric characters in password?");
+                speChar = confirm("Click OK if you would you like to use special characters in password?");
+                if (!uppChar && !lowChar && !numChar && !speChar) {
+                    alert("You must select at least one character option");
+                }
+            }
+            while (!uppChar && !lowChar && !numChar && !speChar)
+           
+            if (uppChar && !lowChar && !numChar && !speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    nextChar = getRandUpper();
+                    newPassword.push(nextChar);
+                }
+            } else if (!uppChar && lowChar && !numChar && !speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    nextChar = getRandLower();
+                    newPassword.push(nextChar);
+                }
+            } else if (!uppChar && !lowChar && numChar && !speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    nextChar = getRandNumeric();
+                    newPassword.push(nextChar);
+                }
+            } else if (!uppChar && !lowChar && !numChar && speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    nextChar = getRandSpecial();
+                    newPassword.push(nextChar);
+                }
+            } else if (uppChar && lowChar && !numChar && !speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    randPick = Math.floor(Math.random() * 2) + 1;
+                    if (randPick == 1) {
+                        nextChar = getRandUpper();
+                        newPassword.push(nextChar);
+                    } else {
+                        nextChar = getRandLower();
+                        newPassword.push(nextChar);
+                    }
+                }
+            } else if (uppChar && !lowChar && numChar && !speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    randPick = Math.floor(Math.random() * 2) + 1;
+                    if (randPick == 1) {
+                        nextChar = getRandUpper();
+                        newPassword.push(nextChar);
+                    } else {
+                        nextChar = getRandNumeric();
+                        newPassword.push(nextChar);
+                    }
+                }
+            } else if (uppChar && !lowChar && !numChar && speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    randPick = Math.floor(Math.random() * 2) + 1;
+                    if (randPick == 1) {
+                        nextChar = getRandUpper();
+                        newPassword.push(nextChar);
+                    } else {
+                        nextChar = getRandSpecial();
+                        newPassword.push(nextChar);
+                    }
+                }
+            } else if (!uppChar && lowChar && numChar && !speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    randPick = Math.floor(Math.random() * 2) + 1;
+                    if (randPick == 1) {
+                        nextChar = getRandLower();
+                        newPassword.push(nextChar);
+                    } else {
+                        nextChar = getRandNumeric();
+                        newPassword.push(nextChar);
+                    }
+                }
+            } else if (!uppChar && lowChar && !numChar && speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    randPick = Math.floor(Math.random() * 2) + 1;
+                    if (randPick == 1) {
+                        nextChar = getRandLower();
+                        newPassword.push(nextChar);
+                    } else {
+                        nextChar = getRandSpecial();
+                        newPassword.push(nextChar);
+                    }
+                }
+            } else if (!uppChar && !lowChar && numChar && speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    randPick = Math.floor(Math.random() * 2) + 1;
+                    if (randPick == 1) {
+                        nextChar = getRandNumeric();
+                        newPassword.push(nextChar);
+                    } else {
+                        nextChar = getRandSpecial();
+                        newPassword.push(nextChar);
+                    }
+                }
+            } else if (uppChar && lowChar && numChar && !speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    randPick = Math.floor(Math.random() * 3) + 1;
+                    if (randPick == 1) {
+                        nextChar = getRandUpper();
+                        newPassword.push(nextChar);
+                    } else if (randPick == 2) {
+                        nextChar = getRandLower();
+                        newPassword.push(nextChar);
+                    } else if (randPick == 3) {
+                        nextChar = getRandNumeric();
+                        newPassword.push(nextChar);
+                    }
+                }
+            } else if (uppChar && !lowChar && numChar && speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    randPick = Math.floor(Math.random() * 3) + 1;
+                    if (randPick == 1) {
+                        nextChar = getRandUpper();
+                        newPassword.push(nextChar);
+                    } else if (randPick == 2) {
+                        nextChar = getRandNumeric();
+                        newPassword.push(nextChar);
+                    } else if (randPick == 3) {
+                        nextChar = getRandSpecial();
+                        newPassword.push(nextChar);
+                    }
+                }
+            } else if (!uppChar && lowChar && numChar && speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    randPick = Math.floor(Math.random() * 3) + 1;
+                    if (randPick == 1) {
+                        nextChar = getRandLower();
+                        newPassword.push(nextChar);
+                    } else if (randPick == 2) {
+                        nextChar = getRandNumeric();
+                        newPassword.push(nextChar);
+                    } else if (randPick == 3) {
+                        nextChar = getRandSpecial();
+                        newPassword.push(nextChar);
+                    }
+                }
+            } else if (uppChar && lowChar && !numChar && speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    randPick = Math.floor(Math.random() * 3) + 1;
+                    if (randPick == 1) {
+                        nextChar = getRandUpper();
+                        newPassword.push(nextChar);
+                    } else if (randPick == 2) {
+                        nextChar = getRandLower();
+                        newPassword.push(nextChar);
+                    } else if (randPick == 3) {
+                        nextChar = getRandSpecial();
+                        newPassword.push(nextChar);
+                    }
+                }
+            } else if (uppChar && lowChar && numChar && speChar) {
+                for (i = 0; i < passwordLength; i++) {
+                    randPick = Math.floor(Math.random() * 4) + 1;
+                    if (randPick == 1) {
+                        nextChar = getRandUpper();
+                        newPassword.push(nextChar);
+                    } else if (randPick == 2) {
+                        nextChar = getRandLower();
+                        newPassword.push(nextChar);
+                    } else if (randPick == 3) {
+                        nextChar = getRandNumeric();
+                        newPassword.push(nextChar);
+                    }
+                    else if (randPick == 4) {
+                        nextChar = getRandSpecial();
+                        newPassword.push(nextChar);
+                    }
+                }
+            }
+            generatedPassword = newPassword.join('');
+            document.getElementById("passwordArea").value = generatedPassword;
+            //document.getElementById("generate").addEventListener("click", clearField());
+            //alert(generatedPassword);
+        }
+
+       
+    </script>
+</body>
+
+</html>
