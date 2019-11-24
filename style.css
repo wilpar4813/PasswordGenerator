@@ -18,10 +18,10 @@ html {
     /* vertical-align: middle; */
     position: absolute;
     display: table;
-    width: 90%;
+    width: 80%;
     margin:0;
-    top:20%;
-    left:5%;
+    top:10%;
+    left:10%;
 }
 
 body {
@@ -87,7 +87,7 @@ hr{
     border-radius: 25px;
     background:grey;
     color: white;
-    margin-left: 40px;
+    margin-top:10px;
     width:200px;
     height:auto;
     height:40px;
@@ -97,7 +97,7 @@ hr{
 
 @media only screen and (max-width: 800px) {
     #copyClipboard{
-        margin:0px;
+        
     }
     #generate{
         margin: 0px;
@@ -105,5 +105,12 @@ hr{
 
     h2{
         text-align: center;
+    }
+  }
+  @media only screen and (max-width: 400px) {
+    html{
+        top:0;
+        left:0;
+        width:100%
     }
   }
