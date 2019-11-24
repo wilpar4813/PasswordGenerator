@@ -19,7 +19,7 @@ https://wilpar4813.github.io/PasswordGenerator/
 
 -Click the Generate Password button
 
--You will be able to select a password length of from 8 to 128 characters.  Enter password lenght in prompt.  Click Q to exit program.
+-You will be able to select a password length of from 8 to 128 characters.  Enter password lenght in prompt.  Click Cancel to exit program.
 -Select from the following 4 options for character type.  You can pick as many types as you want but you must select at least one type.  Pease answer all 4 prompts.  The OK button signals yes and the Cancel button signals no.
 -The new password will be displayed in the "Your Secure Password" field.  You can scroll the window if your password length exceeds the size of the text box.
 -At this point the "Copy to Clipboard" button can be clicked to copy the password to clipboard so it can be pasted to fields that accept pasting.
