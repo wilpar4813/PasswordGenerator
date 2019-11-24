@@ -38,7 +38,7 @@
         var charPosition = 0;
         var generatedPassword = " ";
 
-        //Random character generators  
+        //Random character generators.  See passwordGenerator() for more info.  
         function getRandUpper() {
             var upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']; //upper case letters
             charPosition = Math.floor(Math.random() * 25) + 1;
@@ -78,7 +78,14 @@
             document.execCommand("copy");
             alert("Copied the text: " + copyText.value);
         }
-        //Begin main section of code  
+        
+        // Begin main section of code 
+        // Password Generator prompts the user for a password lenght of from 8 to 128 characters.  Responces are validated.
+        // password Generator prompts the user for 4 types of characters.  If no type is selected, user is prompted again with the selection of the first character type.
+        // There are 16 possible combinations of 4 characters and there is a function call for each type.  
+        // If only one character is selected, each character is randomized from the corresponding getRand*** functions.  
+        // If 2 or more are selected, each character is also randomized for character type.  
+
         function passwordGenerator() {
  
             do {
@@ -98,7 +105,6 @@
             while (passwordLength < 8 || passwordLength > 128 || !Number.isInteger(+passwordLength));
         
             do {
-                //clearField();
                 uppChar = confirm("Click OK if you would you like to use upper case characters in password?");
                 lowChar = confirm("Click OK if you would you like to use lower case characters in password?");
                 numChar = confirm("Click OK if you would you like to use numeric characters in password?");
@@ -270,13 +276,9 @@
                     }
                 }
             }
-            generatedPassword = newPassword.join('');
-            document.getElementById("passwordArea").value = generatedPassword;
-            //document.getElementById("generate").addEventListener("click", clearField());
-            //alert(generatedPassword);
+            generatedPassword = newPassword.join('');  //concatinate the string
+            document.getElementById("passwordArea").value = generatedPassword;  //Print to html textbox
         }
-
-       
     </script>
 </body>
 
